@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel administrativo — Só Filhotes</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#3b231b" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ======================================================= -->
+  <!-- TELA DE LOGIN                                           -->
+  <!-- ======================================================= -->
+  <main class="login-screen" id="loginScreen" hidden>
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="assets/logo.png" alt="" width="56" height="56" />
+        <div><b>Só Filhotes</b><small>Painel administrativo</small></div>
+      </div>
+
+      <h1>Entrar no painel</h1>
+      <p class="login-sub">Acesso restrito à equipe da loja.</p>
+
+      <form id="loginForm" novalidate>
+        <label>
+          <span>E-mail</span>
+          <input id="loginEmail" type="email" autocomplete="username" required placeholder="voce@sofilhotes.com" />
+        </label>
+        <label>
+          <span>Senha</span>
+          <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="••••••••" />
+        </label>
+        <p class="form-error" id="loginError" role="alert"></p>
+        <button class="primary-btn full" type="submit" id="loginSubmit">Entrar</button>
+      </form>
+
+      <!-- Só aparece no modo demonstração (sem back-end) -->
+      <div class="demo-hint" id="demoHint" hidden>
+        <b>Modo demonstração</b>
+        <span>E-mail: <code id="demoEmail"></code> · Senha: <code id="demoPassword"></code></span>
+        <button type="button" class="link-button" id="fillDemo">Preencher automaticamente</button>
+      </div>
+
+      <a class="back-link" href="index.html">← Voltar ao site</a>
+    </div>
+  </main>
+
+  <!-- ======================================================= -->
+  <!-- PAINEL                                                  -->
+  <!-- ======================================================= -->
+  <div class="admin-shell" id="adminShell" hidden>
+
+    <!-- 1. BARRA LATERAL -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <img class="admin-brand-logo" src="assets/logo.png" alt="" width="40" height="40" />
+        <div class="nav-label"><b>Só Filhotes</b><small>Administração</small></div>
+      </div>
+
+      <nav aria-label="Seções do painel">
+        <button class="admin-nav active" data-view="dashboard" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">⌂</span><span class="nav-label">Visão geral</span>
+        </button>
+        <button class="admin-nav" data-view="inventory">
+          <span class="nav-icon" aria-hidden="true">□</span><span class="nav-label">Filhotes / Estoque</span>
+        </button>
+        <button class="admin-nav" data-view="inquiries">
+          <span class="nav-icon" aria-hidden="true">✉</span><span class="nav-label">Interessados</span>
+          <span class="nav-badge" id="navBadge" hidden></span>
+        </button>
+      </nav>
+
+      <div class="admin-side-bottom">
+        <div class="admin-user">
+          <div class="avatar" id="userInitials" aria-hidden="true">AD</div>
+          <div class="nav-label"><b id="userName">Administrador</b><small>Conectado</small></div>
+        </div>
+        <a class="side-link" href="index.html"><span class="nav-icon" aria-hidden="true">↗</span><span class="nav-label">Ver o site</span></a>
+        <button class="side-link" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⎋</span><span class="nav-label">Sair</span></button>
+      </div>
+    </aside>
+
+    <!-- 2. CONTEÚDO -->
+    <section class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <small id="adminBreadcrumb">Painel / Visão geral</small>
+          <h1 id="adminTitle">Visão geral</h1>
+        </div>
+        <div class="admin-top-actions">
+          <span class="live-pill" id="modePill"><i></i> <span id="modeText">Modo demonstração</span></span>
+          <button class="primary-btn compact" id="newDogBtn"><span aria-hidden="true">+</span> <span class="btn-label">Novo filhote</span></button>
+        </div>
+      </header>
+
+      <!-- TELA A: VISÃO GERAL -->
+      <div class="admin-view active" id="view-dashboard">
+        <div class="admin-stats" id="adminStats"></div>
+
+        <div class="admin-two-col">
+          <section class="admin-card">
+            <div class="card-head">
+              <div><h2>Resumo do estoque</h2><p>Distribuição atual por status</p></div>
+            </div>
+            <div class="stock-bars" id="stockBars"></div>
+          </section>
+
+          <section class="admin-card">
+            <div class="card-head">
+              <div><h2>Interessados recentes</h2><p>Últimos contatos enviados pelo site</p></div>
+              <button class="link-button" data-go="inquiries">Ver todos →</button>
+            </div>
+            <div class="activity-list" id="recentInquiries"></div>
+          </section>
+        </div>
+
+        <section class="admin-card">
+          <div class="card-head">
+            <div><h2>Filhotes cadastrados</h2><p>Visão rápida dos registros</p></div>
+            <button class="link-button" data-go="inventory">Ver estoque completo →</button>
+          </div>
+          <div class="mini-table" id="dashboardTable"></div>
+        </section>
+      </div>
+
+      <!-- TELA B: ESTOQUE -->
+      <div class="admin-view" id="view-inventory">
+        <section class="admin-card flush">
+          <div class="inventory-toolbar">
+            <label class="search-box admin-search">
+              <span aria-hidden="true">⌕</span>
+              <span class="sr-only">Buscar no estoque</span>
+              <input id="adminSearch" type="search" placeholder="Buscar por nome ou raça..." autocomplete="off" />
+            </label>
+            <select id="adminStatusFilter" class="select-control" aria-label="Filtrar por status">
+              <option value="Todos">Todos os status</option>
+              <option>Disponível</option>
+              <option>Reservado</option>
+              <option>Vendido</option>
+            </select>
+            <button class="secondary-btn" id="resetDemoBtn" hidden>Restaurar dados de exemplo</button>
+          </div>
+
+          <div class="inventory-table-wrap">
+            <table class="inventory-table">
+              <caption class="sr-only">Filhotes cadastrados</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Animal</th>
+                  <th scope="col">Raça</th>
+                  <th scope="col">Sexo / idade</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">Status</th>
+                  <th scope="col"><span class="sr-only">Ações</span></th>
+                </tr>
+              </thead>
+              <tbody id="inventoryBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- TELA C: INTERESSADOS -->
+      <div class="admin-view" id="view-inquiries">
+        <section class="admin-card">
+          <div class="card-head wrap">
+            <div><h2>Interessados</h2><p>Contatos enviados pelo formulário do site.</p></div>
+            <div class="tabs" role="group" aria-label="Filtrar interessados">
+              <button class="tab active" data-filtro="pendentes" aria-pressed="true">Pendentes</button>
+              <button class="tab" data-filtro="atendidos" aria-pressed="false">Atendidos</button>
+              <button class="tab" data-filtro="todos" aria-pressed="false">Todos</button>
+            </div>
+          </div>
+          <div class="inquiry-list" id="inquiryList"></div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- MODAL: CADASTRO / EDIÇÃO DE FILHOTE                     -->
+  <!-- ======================================================= -->
+  <div class="modal-backdrop" id="dogFormModal" aria-hidden="true">
+    <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+      <button class="modal-close" data-close="dogFormModal" aria-label="Fechar">×</button>
+
+      <div class="form-header">
+        <span class="soft-label">Painel administrativo</span>
+        <h2 id="formTitle">Cadastrar filhote</h2>
+        <p>Campos com * são obrigatórios.</p>
+      </div>
+
+      <form id="dogForm">
+        <input type="hidden" id="dogId" />
+
+        <div class="form-grid">
+          <label>
+            <span>Nome *</span>
+            <input id="dogName" required maxlength="40" placeholder="Ex.: Thor" />
+          </label>
+          <label>
+            <span>Raça *</span>
+            <input id="dogBreed" required maxlength="60" list="breedList" placeholder="Ex.: Spitz Alemão" />
+            <datalist id="breedList"></datalist>
+          </label>
+          <label>
+            <span>Sexo *</span>
+            <select id="dogSex" required>
+              <option>Macho</option>
+              <option>Fêmea</option>
+            </select>
+          </label>
+          <label>
+            <span>Data de nascimento *</span>
+            <input id="dogBirth" type="date" required />
+          </label>
+          <label>
+            <span>Preço</span>
+            <!-- Campo de texto (e não type="number") para aceitar 3500, 3.500 ou 3.499,90 -->
+            <div class="money-input">
+              <b aria-hidden="true">R$</b>
+              <input id="dogPrice" inputmode="decimal" autocomplete="off" placeholder="3.500 ou 3.499,90" aria-describedby="dogPriceHint" />
+            </div>
+            <small class="hint" id="dogPriceHint">Em branco, o site mostra “Consultar”.</small>
+          </label>
+          <label>
+            <span>Status</span>
+            <select id="dogStatus">
+              <option>Disponível</option>
+              <option>Reservado</option>
+              <option>Vendido</option>
+            </select>
+          </label>
+          <label>
+            <span>Porte</span>
+            <select id="dogSize">
+              <option>Pequeno</option>
+              <option selected>Médio</option>
+              <option>Grande</option>
+            </select>
+          </label>
+          <label>
+            <span>Pelagem</span>
+            <input id="dogCoat" maxlength="40" placeholder="Ex.: Dourada" />
+          </label>
+
+          <div class="span-2 photo-field">
+            <img id="dogImagePreview" data-foto src="assets/sem-foto.svg" alt="Prévia da foto" />
+            <label>
+              <span>Link da foto</span>
+              <input type="url" id="dogImage" placeholder="https://..." />
+              <small class="hint">Sem foto, o site mostra a imagem “Foto em breve”.</small>
+            </label>
+          </div>
+
+          <label class="span-2">
+            <span>Descrição</span>
+            <textarea id="dogDesc" rows="3" maxlength="400" placeholder="Temperamento e principais características..."></textarea>
+          </label>
+
+          <fieldset class="span-2 health-fieldset">
+            <legend>Saúde e documentação</legend>
+            <div class="check-group" id="vaccineChecks"></div>
+            <div class="check-group">
+              <label class="check"><input type="checkbox" id="dogDewormed" /> Vermifugado</label>
+              <label class="check"><input type="checkbox" id="dogChip" /> Microchip</label>
+              <label class="check"><input type="checkbox" id="dogPedigree" /> Pedigree</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="secondary-btn" data-close="dogFormModal">Cancelar</button>
+          <button class="primary-btn" type="submit" id="dogSubmit">Salvar filhote</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Aviso rápido -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toastIcon" aria-hidden="true">✓</span>
+    <div><b id="toastTitle"></b><small id="toastText"></small></div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/api.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

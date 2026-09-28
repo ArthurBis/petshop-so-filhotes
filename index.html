@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Só Filhotes — Encontre seu novo companheiro</title>
+  <meta name="description" content="Só Filhotes: há 29 anos com você no Shopping Santa Úrsula, em Ribeirão Preto. Filhotes selecionados e atendimento próximo." />
+  <meta name="theme-color" content="#3b231b" />
+
+  <!-- Prévia quando o link é compartilhado (WhatsApp, redes sociais) -->
+  <meta property="og:title" content="Só Filhotes — Encontre seu novo companheiro" />
+  <meta property="og:description" content="Só Filhotes: há 29 anos com você no Shopping Santa Úrsula, em Ribeirão Preto. Filhotes selecionados e atendimento próximo." />
+  <meta property="og:image" content="assets/logo.png" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/site.css" />
+</head><body>
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ===================================================== -->
+  <!-- CABEÇALHO (igual em todas as páginas)                 -->
+  <!-- ===================================================== -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Só Filhotes — página inicial">
+        <img class="brand-logo" src="assets/logo.png" alt="" width="50" height="50" />
+        <span class="brand-nome"><strong>Só</strong> Filhotes<small>Os melhores filhotes sempre</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="index.html" aria-current="page">Início</a>
+        <a href="filhotes.html">Filhotes</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+
+      <a class="primary-btn compact nav-cta" href="filhotes.html">Ver filhotes</a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav">☰</button>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Menu">
+        <a href="index.html" aria-current="page">Início</a>
+        <a href="filhotes.html">Filhotes</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- Destaque (hero) -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> Filhotes selecionados com carinho</div>
+          <h1>Seu novo melhor amigo está <em>esperando por você.</em></h1>
+          <p>Conheça nossos filhotes, veja informações completas e converse diretamente com a equipe da Só Filhotes antes de escolher.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="filhotes.html">Conhecer os filhotes <span aria-hidden="true">→</span></a>
+            <button class="text-btn" data-contato-geral>Falar com a equipe <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="trust-row">
+            <div><strong>29 anos</strong><span>com você</span></div>
+            <div><strong>100%</strong><span>acompanhados</span></div>
+            <div><strong>Suporte</strong><span>antes e depois</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1582456891925-a53965520520?auto=format&fit=crop&w=1100&q=80" alt="Filhote de Spitz Alemão sorrindo" />
+            <div class="floating-card top-card">
+              <span class="status-dot"></span>
+              <div><b>Novos filhotes</b><small id="heroDisponiveis">Confira o catálogo</small></div>
+            </div>
+            <div class="floating-card bottom-card">
+              <div class="mini-avatar" aria-hidden="true">♥</div>
+              <div><b>Acompanhamento próximo</b><small>Do primeiro contato ao novo lar</small></div>
+            </div>
+          </div>
+          <div class="hero-shape"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="breed-strip" aria-label="Principais benefícios">
+      <div class="container benefit-row">
+        <div class="benefit"><span aria-hidden="true">✓</span><div><b>Carteira de vacinação</b><small>Vacinas informadas em cada perfil</small></div></div>
+        <div class="benefit"><span aria-hidden="true">♡</span><div><b>Bem-estar em primeiro lugar</b><small>Rotina de cuidado e socialização</small></div></div>
+        <div class="benefit"><span aria-hidden="true">⌂</span><div><b>Escolha consciente</b><small>Orientação para cada família</small></div></div>
+        <div class="benefit"><span aria-hidden="true">↗</span><div><b>Atendimento direto</b><small>Converse pelo WhatsApp</small></div></div>
+      </div>
+    </section>
+
+    <!-- Filhotes em destaque (montados pelo js/paginas/inicio.js) -->
+    <section class="catalog-section">
+      <div class="container">
+        <div class="section-heading row-heading">
+          <div>
+            <div class="eyebrow"><span></span> Disponíveis agora</div>
+            <h2>Filhotes em destaque</h2>
+            <p>Alguns dos filhotes que estão esperando uma família.</p>
+          </div>
+          <a class="section-link" href="filhotes.html">Ver todos os filhotes <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="dog-grid" id="destaques" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Um pouco sobre a loja -->
+    <section class="why-section">
+      <div class="container why-grid">
+        <div class="why-media">
+          <img src="https://images.unsplash.com/photo-1779049979022-77528c1aa6e3?auto=format&fit=crop&w=1000&q=80" alt="Tutora abraçando seu Spitz Alemão" loading="lazy" />
+          <div class="why-badge"><b>Bem-estar</b><span>do início ao novo lar</span></div>
+        </div>
+        <div class="why-copy">
+          <div class="eyebrow light"><span></span> Por que escolher a gente</div>
+          <h2>Mais do que um filhote: o começo de uma nova história.</h2>
+          <p>Nosso processo é pensado para que a escolha seja segura para a família e saudável para o animal: informações transparentes, atendimento individual e acompanhamento até a adaptação no novo lar.</p>
+          <a class="light-outline-btn" href="sobre.html">Conheça a Só Filhotes <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chamada para contato -->
+    <section class="contact-section">
+      <div class="container contact-card">
+        <div>
+          <span class="soft-label">Atendimento personalizado</span>
+          <h2>Ainda não sabe qual filhote combina com você?</h2>
+          <p>Conte um pouco sobre sua rotina e ajudamos a encontrar a melhor opção.</p>
+        </div>
+        <button class="light-btn" data-contato-geral>Conversar no WhatsApp <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================== -->
+  <!-- RODAPÉ (igual em todas as páginas)                    -->
+  <!-- ===================================================== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="index.html" aria-label="Só Filhotes — página inicial">
+          <img class="brand-logo" src="assets/logo.png" alt="" width="54" height="54" loading="lazy" />
+          <span class="brand-nome"><strong>Só</strong> Filhotes<small>Os melhores filhotes sempre</small></span>
+        </a>
+        <p>Carinho, cuidado e acompanhamento para encontrar o novo membro da família.</p>
+      </div>
+      <div>
+        <b>Navegação</b>
+        <a href="index.html">Início</a>
+        <a href="filhotes.html">Filhotes disponíveis</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div>
+        <b>Atendimento</b>
+        <a href="https://wa.me/5516991667491" target="_blank" rel="noopener">WhatsApp (16) 99166-7491</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Shopping%20Santa%20%C3%9Arsula%20Ribeir%C3%A3o%20Preto" target="_blank" rel="noopener">Shopping Santa Úrsula<br />Ribeirão Preto – SP</a>
+        <span>Seg–Sáb · 8h às 18h</span>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Só Filhotes. Todos os direitos reservados.</span>
+      <a href="admin.html">Acesso administrativo</a>
+    </div>
+  </footer>
+
+  <!-- Aviso rápido -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toastIcon" aria-hidden="true">✓</span>
+    <div><b id="toastTitle"></b><small id="toastText"></small></div>
+  </div>
+
+  <!-- Scripts (a ordem importa: api → comum → site → página) -->
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/api.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/paginas/inicio.js"></script>
+</body>
+</html>

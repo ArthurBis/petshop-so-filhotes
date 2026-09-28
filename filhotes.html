@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Filhotes disponíveis — Só Filhotes</title>
+  <meta name="description" content="Veja todos os filhotes da Só Filhotes: raça, idade, vacinas e preço. Filtre e salve seus favoritos." />
+  <meta name="theme-color" content="#3b231b" />
+
+  <!-- Prévia quando o link é compartilhado (WhatsApp, redes sociais) -->
+  <meta property="og:title" content="Filhotes disponíveis — Só Filhotes" />
+  <meta property="og:description" content="Veja todos os filhotes da Só Filhotes: raça, idade, vacinas e preço. Filtre e salve seus favoritos." />
+  <meta property="og:image" content="assets/logo.png" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/site.css" />
+</head><body>
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ===================================================== -->
+  <!-- CABEÇALHO (igual em todas as páginas)                 -->
+  <!-- ===================================================== -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Só Filhotes — página inicial">
+        <img class="brand-logo" src="assets/logo.png" alt="" width="50" height="50" />
+        <span class="brand-nome"><strong>Só</strong> Filhotes<small>Os melhores filhotes sempre</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="index.html">Início</a>
+        <a href="filhotes.html" aria-current="page">Filhotes</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+
+      <a class="primary-btn compact nav-cta" href="filhotes.html">Ver filhotes</a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav">☰</button>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Menu">
+        <a href="index.html">Início</a>
+        <a href="filhotes.html" aria-current="page">Filhotes</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Você está em">
+          <a href="index.html">Início</a><span aria-hidden="true">›</span><span aria-current="page">Filhotes</span>
+        </nav>
+        <div class="page-hero-row">
+          <div>
+            <h1>Nossos filhotes</h1>
+            <p>Use a busca e os filtros para encontrar um perfil que combine com a sua família.</p>
+          </div>
+          <div class="availability-pill"><span class="status-dot"></span><b id="availableCountPublic">0</b> disponíveis</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catálogo (montado pelo js/paginas/filhotes.js) -->
+    <section class="catalog-section compact">
+      <div class="container">
+        <div class="catalog-toolbar">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <span class="sr-only">Buscar filhote</span>
+            <input id="searchInput" type="search" placeholder="Buscar por nome ou raça..." autocomplete="off" />
+          </label>
+          <div class="filter-group" id="breedFilters" role="group" aria-label="Filtrar por raça"></div>
+          <button class="filter-chip fav-toggle" id="favToggle" aria-pressed="false">
+            <span aria-hidden="true">♥</span> Favoritos <span class="fav-count" data-fav-count>0</span>
+          </button>
+          <select id="sexFilter" class="select-control" aria-label="Filtrar por sexo">
+            <option value="Todos">Todos os sexos</option>
+            <option value="Macho">Machos</option>
+            <option value="Fêmea">Fêmeas</option>
+          </select>
+        </div>
+
+        <div class="dog-grid" id="dogGrid" aria-live="polite" aria-busy="true"></div>
+
+        <div class="empty-state hidden" id="emptyState">
+          <div aria-hidden="true">🐾</div>
+          <h2 class="empty-title" id="emptyTitle">Nenhum filhote encontrado</h2>
+          <p id="emptyText">Tente alterar os filtros da busca.</p>
+          <button class="secondary-btn" id="clearFilters">Limpar filtros</button>
+        </div>
+
+        <div class="empty-state hidden" id="errorState">
+          <div aria-hidden="true">⚠️</div>
+          <h2 class="empty-title">Não foi possível carregar os filhotes</h2>
+          <p id="errorText">Verifique sua conexão e tente novamente.</p>
+          <button class="secondary-btn" id="retryLoad">Tentar novamente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chamada para contato -->
+    <section class="contact-section">
+      <div class="container contact-card">
+        <div>
+          <span class="soft-label">Atendimento personalizado</span>
+          <h2>Ainda não sabe qual filhote combina com você?</h2>
+          <p>Conte um pouco sobre sua rotina e ajudamos a encontrar a melhor opção.</p>
+        </div>
+        <button class="light-btn" data-contato-geral>Conversar no WhatsApp <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================== -->
+  <!-- RODAPÉ (igual em todas as páginas)                    -->
+  <!-- ===================================================== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="index.html" aria-label="Só Filhotes — página inicial">
+          <img class="brand-logo" src="assets/logo.png" alt="" width="54" height="54" loading="lazy" />
+          <span class="brand-nome"><strong>Só</strong> Filhotes<small>Os melhores filhotes sempre</small></span>
+        </a>
+        <p>Carinho, cuidado e acompanhamento para encontrar o novo membro da família.</p>
+      </div>
+      <div>
+        <b>Navegação</b>
+        <a href="index.html">Início</a>
+        <a href="filhotes.html">Filhotes disponíveis</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div>
+        <b>Atendimento</b>
+        <a href="https://wa.me/5516991667491" target="_blank" rel="noopener">WhatsApp (16) 99166-7491</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Shopping%20Santa%20%C3%9Arsula%20Ribeir%C3%A3o%20Preto" target="_blank" rel="noopener">Shopping Santa Úrsula<br />Ribeirão Preto – SP</a>
+        <span>Seg–Sáb · 8h às 18h</span>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Só Filhotes. Todos os direitos reservados.</span>
+      <a href="admin.html">Acesso administrativo</a>
+    </div>
+  </footer>
+
+  <!-- Aviso rápido -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toastIcon" aria-hidden="true">✓</span>
+    <div><b id="toastTitle"></b><small id="toastText"></small></div>
+  </div>
+
+  <!-- Scripts (a ordem importa: api → comum → site → página) -->
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/api.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/paginas/filhotes.js"></script>
+</body>
+</html>

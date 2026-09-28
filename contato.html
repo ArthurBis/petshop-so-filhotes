@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contato — Só Filhotes</title>
+  <meta name="description" content="Fale com a Só Filhotes: WhatsApp (16) 99166-7491 · Shopping Santa Úrsula, Ribeirão Preto." />
+  <meta name="theme-color" content="#3b231b" />
+
+  <!-- Prévia quando o link é compartilhado (WhatsApp, redes sociais) -->
+  <meta property="og:title" content="Contato — Só Filhotes" />
+  <meta property="og:description" content="Fale com a Só Filhotes: WhatsApp (16) 99166-7491 · Shopping Santa Úrsula, Ribeirão Preto." />
+  <meta property="og:image" content="assets/logo.png" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/site.css" />
+</head><body>
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ===================================================== -->
+  <!-- CABEÇALHO (igual em todas as páginas)                 -->
+  <!-- ===================================================== -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Só Filhotes — página inicial">
+        <img class="brand-logo" src="assets/logo.png" alt="" width="50" height="50" />
+        <span class="brand-nome"><strong>Só</strong> Filhotes<small>Os melhores filhotes sempre</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="index.html">Início</a>
+        <a href="filhotes.html">Filhotes</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html" aria-current="page">Contato</a>
+      </nav>
+
+      <a class="primary-btn compact nav-cta" href="filhotes.html">Ver filhotes</a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav">☰</button>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Menu">
+        <a href="index.html">Início</a>
+        <a href="filhotes.html">Filhotes</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html" aria-current="page">Contato</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Você está em">
+          <a href="index.html">Início</a><span aria-hidden="true">›</span><span aria-current="page">Contato</span>
+        </nav>
+        <div class="page-hero-row">
+          <div>
+            <h1>Fale com a gente</h1>
+            <p>Tire dúvidas, peça mais informações sobre um filhote ou combine uma conversa com a equipe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-page">
+      <div class="container contact-grid">
+        <!-- Informações -->
+        <div class="contact-info">
+          <article class="info-card">
+            <div class="info-icon" aria-hidden="true">✆</div>
+            <div>
+              <h2>WhatsApp</h2>
+              <p class="info-destaque">(16) 99166-7491</p>
+              <a class="whatsapp-btn" href="https://wa.me/5516991667491?text=Ol%C3%A1!%20Encontrei%20a%20S%C3%B3%20Filhotes%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Abrir conversa <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="info-card">
+            <div class="info-icon" aria-hidden="true">⌖</div>
+            <div>
+              <h2>Onde estamos</h2>
+              <p class="info-destaque">Shopping Santa Úrsula</p>
+              <p>Ribeirão Preto – SP</p>
+              <a class="secondary-btn small map-btn" href="https://www.google.com/maps/search/?api=1&query=Shopping%20Santa%20%C3%9Arsula%20Ribeir%C3%A3o%20Preto" target="_blank" rel="noopener">Ver no mapa <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="info-card">
+            <div class="info-icon" aria-hidden="true">◷</div>
+            <div>
+              <h2>Horário de atendimento</h2>
+              <p class="info-destaque">Segunda a sábado</p>
+              <p>das 8h às 18h</p>
+            </div>
+          </article>
+          <article class="info-card">
+            <div class="info-icon" aria-hidden="true">♡</div>
+            <div>
+              <h2>Como respondemos</h2>
+              <ol class="info-steps">
+                <li>Você envia seu nome e telefone.</li>
+                <li>A equipe responde pelo WhatsApp.</li>
+                <li>Vocês combinam os próximos passos.</li>
+              </ol>
+            </div>
+          </article>
+        </div>
+
+        <!-- Formulário (montado pelo js/paginas/contato.js) -->
+        <div class="contact-form-card">
+          <h2>Envie sua mensagem</h2>
+          <p>Seu contato fica registrado para a equipe e o WhatsApp abre com a mensagem pronta.</p>
+          <div id="formContato" data-interesse></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================== -->
+  <!-- RODAPÉ (igual em todas as páginas)                    -->
+  <!-- ===================================================== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="index.html" aria-label="Só Filhotes — página inicial">
+          <img class="brand-logo" src="assets/logo.png" alt="" width="54" height="54" loading="lazy" />
+          <span class="brand-nome"><strong>Só</strong> Filhotes<small>Os melhores filhotes sempre</small></span>
+        </a>
+        <p>Carinho, cuidado e acompanhamento para encontrar o novo membro da família.</p>
+      </div>
+      <div>
+        <b>Navegação</b>
+        <a href="index.html">Início</a>
+        <a href="filhotes.html">Filhotes disponíveis</a>
+        <a href="sobre.html">Sobre nós</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div>
+        <b>Atendimento</b>
+        <a href="https://wa.me/5516991667491" target="_blank" rel="noopener">WhatsApp (16) 99166-7491</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Shopping%20Santa%20%C3%9Arsula%20Ribeir%C3%A3o%20Preto" target="_blank" rel="noopener">Shopping Santa Úrsula<br />Ribeirão Preto – SP</a>
+        <span>Seg–Sáb · 8h às 18h</span>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Só Filhotes. Todos os direitos reservados.</span>
+      <a href="admin.html">Acesso administrativo</a>
+    </div>
+  </footer>
+
+  <!-- Aviso rápido -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toastIcon" aria-hidden="true">✓</span>
+    <div><b id="toastTitle"></b><small id="toastText"></small></div>
+  </div>
+
+  <!-- Scripts (a ordem importa: api → comum → site → página) -->
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/api.js"></script>
+  <script src="js/comum.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/paginas/contato.js"></script>
+</body>
+</html>
