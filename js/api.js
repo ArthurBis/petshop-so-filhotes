@@ -194,15 +194,26 @@ const Api = (() => {
       }
     }
 
-    const linha = await chamar(
-      supabaseClient
-        .from('interessados')
-        .insert({ nome, telefone, filhote_id: filhoteId, filhote_nome: filhoteNome, mensagem: mensagem || '' })
-        .select()
-        .single(),
-      'registrar interesse'
-    );
-    return linhaParaInteressado(linha);
+    // Importante: sem .select() aqui. Um visitante anônimo pode INSERIR um
+    // interessado, mas não pode LER a tabela de volta (só a equipe logada
+    // pode ler interessados). Pedir a linha de volta faria essa chamada
+    // falhar por causa da política de segurança, mesmo o insert já tendo
+    // funcionado — por isso montamos o objeto de retorno aqui mesmo.
+    const { error } = await supabaseClient
+      .from('interessados')
+      .insert({ nome, telefone, filhote_id: filhoteId, filhote_nome: filhoteNome, mensagem: mensagem || '' });
+    if (error) throw tratarErroSupabase(error, 'registrar interesse');
+
+    return {
+      id: null,
+      nome,
+      telefone,
+      filhoteId,
+      filhoteNome,
+      mensagem: mensagem || '',
+      criadoEm: new Date().toISOString(),
+      atendido: false,
+    };
   }
 
   // GET /interessados — exige login
