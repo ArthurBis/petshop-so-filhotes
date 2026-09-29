@@ -119,27 +119,6 @@ const Api = (() => {
   }
 
   /* ------------------------------------------------------------------------
-     Upload de fotos (Supabase Storage)
-     ------------------------------------------------------------------------ */
-  const BUCKET_FOTOS = 'fotos-filhotes';
-
-  // Envia um arquivo de imagem e devolve a URL pública dele — exige login
-  async function enviarFoto(arquivo) {
-    if (!arquivo) return null;
-    const extensao = (arquivo.name.split('.').pop() || 'jpg').toLowerCase();
-    const nomeArquivo = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${extensao}`;
-
-    const { error } = await supabaseClient.storage.from(BUCKET_FOTOS).upload(nomeArquivo, arquivo, {
-      cacheControl: '3600',
-      upsert: false,
-    });
-    if (error) throw tratarErroSupabase(error, 'enviar foto');
-
-    const { data } = supabaseClient.storage.from(BUCKET_FOTOS).getPublicUrl(nomeArquivo);
-    return data.publicUrl;
-  }
-
-  /* ------------------------------------------------------------------------
      Filhotes
      ------------------------------------------------------------------------ */
 
@@ -266,7 +245,6 @@ const Api = (() => {
     listarFilhotes,
     salvarFilhote,
     excluirFilhote,
-    enviarFoto,
     registrarInteresse,
     listarInteressados,
     marcarAtendido,

@@ -761,13 +761,6 @@
   flex: 1;
 }
 
-.photo-field .photo-inputs {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 .health-fieldset {
   margin: 0;
   padding: 14px 16px 16px;
