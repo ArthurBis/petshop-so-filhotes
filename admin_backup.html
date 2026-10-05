@@ -253,11 +253,17 @@
 
           <div class="span-2 photo-field">
             <img id="dogImagePreview" data-foto src="assets/sem-foto.svg" alt="Prévia da foto" />
-            <label>
-              <span>Link da foto</span>
-              <input type="url" id="dogImage" placeholder="https://..." />
-              <small class="hint">Sem foto, o site mostra a imagem “Foto em breve”.</small>
-            </label>
+            <div class="photo-inputs">
+              <label>
+                <span>Enviar foto do computador</span>
+                <input type="file" id="dogImageFile" accept="image/*" />
+              </label>
+              <label>
+                <span>Ou link da foto</span>
+                <input type="url" id="dogImage" placeholder="https://..." />
+                <small class="hint">Sem foto, o site mostra a imagem “Foto em breve”. Enviando um arquivo, ele tem prioridade sobre o link.</small>
+              </label>
+            </div>
           </div>
 
           <label class="span-2">

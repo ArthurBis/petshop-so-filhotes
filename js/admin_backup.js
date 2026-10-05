@@ -303,6 +303,11 @@ function montarCheckboxesDeVacina() {
 }
 
 function atualizarPreviaFoto() {
+  const arquivo = $('#dogImageFile').files[0];
+  if (arquivo) {
+    $('#dogImagePreview').src = URL.createObjectURL(arquivo);
+    return;
+  }
   const url = $('#dogImage').value.trim();
   $('#dogImagePreview').src = url || FOTO_PADRAO;
 }
@@ -389,12 +394,19 @@ async function salvarFormulario(evento) {
   // Usa a validação do próprio navegador (required, type="url"...)
   if (!form.reportValidity()) return;
 
-  const filhote = lerFormulario();
   const botao = $('#dogSubmit');
   botao.disabled = true;
-  botao.textContent = 'Salvando…';
+
+  const arquivo = $('#dogImageFile').files[0];
 
   try {
+    if (arquivo) {
+      botao.textContent = 'Enviando foto…';
+      $('#dogImage').value = await Api.enviarFoto(arquivo);
+    }
+
+    const filhote = lerFormulario();
+    botao.textContent = 'Salvando…';
     const salvo = await Api.salvarFilhote(filhote);
     if (filhote.id) {
       painel.filhotes = painel.filhotes.map((f) => (f.id === salvo.id ? salvo : f));
@@ -496,7 +508,14 @@ $$('[data-go]').forEach((botao) => botao.addEventListener('click', () => trocarT
 
 $('#newDogBtn').addEventListener('click', () => abrirFormulario());
 $('#dogForm').addEventListener('submit', salvarFormulario);
-$('#dogImage').addEventListener('input', atualizarPreviaFoto);
+$('#dogImage').addEventListener('input', () => {
+  if ($('#dogImage').value.trim()) $('#dogImageFile').value = '';
+  atualizarPreviaFoto();
+});
+$('#dogImageFile').addEventListener('change', () => {
+  if ($('#dogImageFile').files[0]) $('#dogImage').value = '';
+  atualizarPreviaFoto();
+});
 $('#dogPrice').addEventListener('input', validarPreco);
 $('#dogPrice').addEventListener('blur', formatarCampoPreco);
 

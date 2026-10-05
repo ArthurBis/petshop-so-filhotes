@@ -328,7 +328,7 @@ function abrirFormulario(filhote = null) {
     $('#dogBreed').value = filhote.raca;
     $('#dogSex').value = filhote.sexo;
     $('#dogBirth').value = filhote.nascimento || '';
-    $('#dogPrice').value = formatarValorCampo(filhote.preco);
+    $('#dogPrice').value = precoParaCampo(filhote.preco);
     $('#dogStatus').value = filhote.status;
     $('#dogSize').value = filhote.porte || 'Médio';
     $('#dogCoat').value = filhote.pelagem || '';
@@ -357,10 +357,36 @@ function validarPreco() {
   return valor;
 }
 
-// Ao sair do campo, mostra o valor já formatado (3500 → 3.500)
-function formatarCampoPreco() {
-  const valor = validarPreco();
-  if (valor !== null && !Number.isNaN(valor)) $('#dogPrice').value = formatarValorCampo(valor);
+// Máscara de moeda "estilo app de banco": os dígitos entram pela direita,
+// começando pelos centavos. 5 → 0,05 · 350 → 3,50 · 350000 → 3.500,00
+// Apagar tudo deixa o campo vazio (o site mostra "Consultar").
+function mascararPreco(texto) {
+  const digitos = String(texto).replace(/\D/g, '').replace(/^0+/, '').slice(0, 10);
+  if (!digitos) return '';
+  const centavos = digitos.padStart(3, '0');
+  const reais = centavos.slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return `${reais},${centavos.slice(-2)}`;
+}
+
+// Número em reais → texto do campo (3500 → "3.500,00")
+function precoParaCampo(preco) {
+  if (preco === null || preco === undefined || preco === '') return '';
+  return mascararPreco(String(Math.round(Number(preco) * 100)));
+}
+
+function aplicarMascaraPreco() {
+  const campo = $('#dogPrice');
+  campo.value = mascararPreco(campo.value);
+  campo.setSelectionRange(campo.value.length, campo.value.length); // cursor sempre no fim
+  validarPreco();
+}
+
+// Ao colar "3.499,90" ou "3500", interpreta como valor em reais (não como centavos)
+function colarPreco(evento) {
+  evento.preventDefault();
+  const valor = lerValorEmReais(evento.clipboardData.getData('text'));
+  $('#dogPrice').value = Number.isFinite(valor) ? precoParaCampo(valor) : '';
+  validarPreco();
 }
 
 function lerFormulario() {
@@ -516,8 +542,8 @@ $('#dogImageFile').addEventListener('change', () => {
   if ($('#dogImageFile').files[0]) $('#dogImage').value = '';
   atualizarPreviaFoto();
 });
-$('#dogPrice').addEventListener('input', validarPreco);
-$('#dogPrice').addEventListener('blur', formatarCampoPreco);
+$('#dogPrice').addEventListener('input', aplicarMascaraPreco);
+$('#dogPrice').addEventListener('paste', colarPreco);
 
 $('#adminSearch').addEventListener('input', renderizarEstoque);
 $('#adminStatusFilter').addEventListener('change', renderizarEstoque);
